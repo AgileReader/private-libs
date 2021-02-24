@@ -51,8 +51,47 @@ function slugify(s) {
     .replace(/-$/, '');
 }
 
+/**
+ * For string containing spaces return dash separated lengths of substrings.
+ * Example:
+ *     "a bc def" => "1-2-3
+ *
+ * @param str
+ * @param separator
+ * @returns {{chunks: string[], length: string}|{chunks: (never|string)[], length: string}|{chunks: Array, length: string}}
+ */
+
+function multiwordLength(str, separator = '-') {
+  let s = str.trim();
+  if (s === '') {
+    return {
+      length: '0',
+      chunks: [],
+    };
+  }
+
+  let chunks = s.split(/ +/);
+  if (chunks.length < 2) {
+    return {
+      length: s.length.toString(),
+      chunks: [s],
+    };
+  }
+
+  let digits = [];
+  chunks.map(v => {
+    digits.push(v.length);
+  });
+
+  return {
+    length: digits.join(separator),
+    chunks: chunks,
+  };
+}
+
 module.exports = {
   capitalizeFirstLetters,
   regexpQuote,
   slugify,
+  multiwordLength,
 };
