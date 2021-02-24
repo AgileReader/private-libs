@@ -1,6 +1,6 @@
-const brand = require('./../../src/brand');
+const brandlib = require('./../../src/brandlib');
 
 test('brand: info', () => {
-  expect(brand.brand('abc', 'v0.1.0')).toEqual('\nAgile Reader v0.1.0 / abc');
+  expect(brandlib.brand('abc', 'v0.1.0')).toEqual('\nAgile Reader v0.1.0 / abc');
 });
 
