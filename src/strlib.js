@@ -52,6 +52,19 @@ function slugify(s) {
 }
 
 /**
+ * Converts slug into capitalized string.
+ * Example:
+ *     "abc-defgh" => "Abc Defgh"
+ * @param s
+ * @returns {string}
+ */
+function unslugify(s) {
+  let tmp = s.replace(/_/g, ' ').replace(/-/g, ' ').replace(/ +/g, ' ');
+
+  return capitalizeFirstLetters(tmp);
+}
+
+/**
  * For string containing spaces return dash separated lengths of substrings.
  * Example:
  *     "a bc def" => "1-2-3
@@ -60,7 +73,6 @@ function slugify(s) {
  * @param separator
  * @returns {{chunks: string[], length: string}|{chunks: (never|string)[], length: string}|{chunks: Array, length: string}}
  */
-
 function multiwordLength(str, separator = '-') {
   let s = str.trim();
   if (s === '') {
@@ -89,9 +101,60 @@ function multiwordLength(str, separator = '-') {
   };
 }
 
+/**
+ * Convert utf-8 special chars into ASCII equivalents.
+ *
+ * Converted chars:
+ *   - Quotation marks
+ *   - Dashes
+ *   - Apostrophes
+ *
+ * @param input
+ * @returns {string}
+ */
+function toAscii(input) {
+  let output = input.replace(/—/gu, '-');
+  // prettier-ignore
+  output = output.replace(/’/gu, '\'');
+  output = output.replace(/“/gu, '"');
+  output = output.replace(/”/gu, '"');
+
+  return output;
+}
+
+/**
+ * Remove special chars:
+ *   - tabulator
+ *   - catrridge return
+ *
+ * @param input
+ * @returns {string}
+ */
+function removeSpecialChars(input) {
+  let output = input.replace(/\r/g, '');
+  output = output.replace(/\t/g, ' ');
+
+  return output;
+}
+
+/**
+ * Get chunks of filename after stripping prefix.
+ *
+ * @param s
+ * @param prefix
+ * @returns {string[]}
+ */
+function filenameChunks(s, prefix) {
+  return s.replace(prefix, '').split('/');
+}
+
 module.exports = {
   capitalizeFirstLetters,
   regexpQuote,
   slugify,
   multiwordLength,
+  toAscii,
+  removeSpecialChars,
+  unslugify,
+  filenameChunks,
 };
