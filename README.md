@@ -1,7 +1,7 @@
 # Private Lib
 
 ```
-npm i git+ssh://git@github.com:gajdaw/private-libs.git
+npm i git+ssh://git@github.com:AgileReader/private-libs.git
 ```
 
 Tests:
