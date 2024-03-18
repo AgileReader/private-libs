@@ -5,9 +5,9 @@
   "author": "Włodzimierz Gajda <gajdaw@gajdaw.pl> (http://gajdaw.pl)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gajdaw/private-libs.git"
+    "url": "git+https://github.com/AgileReader/private-libs.git"
   },
-  "homepage": "https://github.com/gajdaw/private-libs",
+  "homepage": "https://github.com/AgileReader/private-libs",
   "license": "MIT",
   "private": true,
   "keywords": [
